@@ -1,0 +1,19 @@
+{
+  "name": "conecta_garopaba",
+  "version": "1.0.0",
+  "description": "Programa Conecta Garopaba",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/governodegaropaba/conecta_garopaba.git"
+  },
+  "author": "DTI - Diretoria de Tecnologia da Informação",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/governodegaropaba/conecta_garopaba/issues"
+  },
+  "homepage": "https://github.com/governodegaropaba/conecta_garopaba#readme"
+}

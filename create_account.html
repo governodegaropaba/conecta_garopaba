@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-	<title>Login - Conecta Garopaba</title>
+	<title>Cadastro - Conecta Garopaba</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -28,12 +28,22 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-26">
-						<img src="images/logo.png">
+						<img src="images/logo-128.png">
 					</span>
 					
+					<div class="wrap-input100 validate-input" data-validate="Informe seu nome">
+						<input class="input100" type="text" name="name">
+						<span class="focus-input100" data-placeholder="Nome Completo"></span>
+					</div>
+
 					<div class="wrap-input100 validate-input" data-validate = "Informe um CPF válido">
 						<input class="input100" oninput="applyCPFMask(this);" type="text" name="cpf">
 						<span class="focus-input100" data-placeholder="CPF"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Informe um e-mail válido">
+						<input class="input100" type="email" name="email">
+						<span class="focus-input100" data-placeholder="E-mail"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Informe uma data válida">
@@ -41,24 +51,25 @@
 						<span class="focus-input100" data-placeholder="Data de Nascimento"></span>
 					</div>
 
+					<div class="text-center">
+						<span class="txt1">
+							<input type="checkbox" name="auth">&nbsp;Concordo com os 
+						</span>
+
+						<a class="txt2" href="#" target="_blank">
+							termos de uso
+						</a>
+					</div>
+					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
-								Entrar
+								Cadastrar
 							</button>
 						</div>
 					</div>
 
-					<div class="text-center p-t-15">
-						<span class="txt1">
-							Não possui uma conta?
-						</span>
-
-						<a class="txt2" href="create_account.html">
-							Cadastre-se
-						</a>
-					</div>
 				</form>
 			</div>
 		</div>

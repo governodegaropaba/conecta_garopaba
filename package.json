@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/governodegaropaba/conecta_garopaba/issues"
   },
-  "homepage": "https://github.com/governodegaropaba/conecta_garopaba#readme"
+  "homepage": "https://github.com/governodegaropaba/conecta_garopaba#readme",  
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
 }

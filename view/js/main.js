@@ -31,7 +31,20 @@
             }
         }
 
-        return check;
+        // Se algum campo não for preenchido, retorna o erro
+        if (!check) {
+            return check;
+        }
+
+        console.log($('.validate-form').serializeArray());        
+        if ($('.validate-form input[name="name"]').length > 0) {
+            // Criar conta
+            return sendCreateAccount();
+        } else {
+            // Realizar login
+            return sendUserLogin();
+        }
+        
     });
 
 
@@ -64,26 +77,15 @@
         var thisAlert = $(input).parent();
 
         $(thisAlert).removeClass('alert-validate');
-    }
-    
-    /*==================================================================
-    [ Show pass ]*/
-    var showPass = 0;
-    $('.btn-show-pass').on('click', function(){
-        if(showPass == 0) {
-            $(this).next('input').attr('type','text');
-            $(this).find('i').removeClass('zmdi-eye');
-            $(this).find('i').addClass('zmdi-eye-off');
-            showPass = 1;
-        }
-        else {
-            $(this).next('input').attr('type','password');
-            $(this).find('i').addClass('zmdi-eye');
-            $(this).find('i').removeClass('zmdi-eye-off');
-            showPass = 0;
-        }
+    }        
+
+    function sendCreateAccount() {
         
-    });
+    }
+
+    function sendUserLogin() {
+
+    }
 
 })(jQuery);
 

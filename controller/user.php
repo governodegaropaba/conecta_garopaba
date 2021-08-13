@@ -14,12 +14,13 @@ require('../model/user.php');
  * Leitura dos parâmetros
  */
 error_log(serialize($_GET));
-$data = new stdClass();
-$data->basedir = dirname(__FILE__).DS;
-$data->task = filter_input(INPUT_GET, 'task'); // FUNÇÃO A SER ACIONADA
-$data->content = filter_input(INPUT_GET, 'content'); // DADOS DO FORMULÁRIO
+error_log(serialize($_POST));
 
-if (trim($$data->content) === '' || trim($data->task) === '') {
+$data = new stdClass();
+$data->task = filter_input(INPUT_POST, 'task'); // FUNÇÃO A SER ACIONADA
+$data->content = filter_input(INPUT_POST, 'content'); // DADOS DO FORMULÁRIO
+
+if (trim($data->content) === '' || trim($data->task) === '') {
     error('Faltou parâmetro (usr-01).');
 } else {
     $obj_content = json_decode($data->content);
@@ -33,6 +34,33 @@ $model = new UserModel();
 
 // REALIZA O TRATAMENTO DOS DADOS DE ACORDO COM O 'TASK'
 if ($data->task === 'login_user') {
+    // Verificando os parâmetros recebidos
+    $cpf = "";
+    $data_nasc = "";    
+    foreach($obj_content as $obj) {
+        error_log(serialize($obj));
+        if ($obj->name === 'cpf') {
+            $cpf = $obj->value;
+        } else if ($obj->name === 'data_nasc') {
+            $data_nasc = $obj->value;
+        } else {
+            error('Parâmetro de conteúdo desconhecido (usr-03)');
+        }
+    }
+
+    if ($cpf === '' || $data_nasc === '') {
+        error('Dados inválidos (usr-04)');
+    }
+
+    error_log('CPF: [' . $cpf . '] | Data Nasc: [' . $data_nasc . ']');
+    // Corrigindo CPF
+    $cpf = str_replace(array('.','-'), '', $cpf);
+    error_log('CPF: [' . $cpf . '] | Data Nasc: [' . $data_nasc . ']');
+
+    if (!$model->checkIfUserExists($cpf)) {
+        error('Usuário não cadastrado');
+    }
+
     // VALIDA O LOGIN DO USUÁRIO
     // - Recebe dados de CPF e Data de Nascimento
     // - Valida no BD se os dados existem e estão válidos

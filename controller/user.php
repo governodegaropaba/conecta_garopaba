@@ -1,13 +1,20 @@
 <?php
 /**
  * 
- * @author Roberto Abreu Bento
+ * @author Roberto Abreu Bento <dti@garopaba.sc.gov.br>
  *
  * Recebe a solicitação de acesso ou cadastro na plataforma
  * 
+ * Mapa de Erros
+ * 
+ * USR01 - Algum parâmetro obrigatório na consulta não foi informado
+ * USR02 - Dados do formulário em um formato inválido
+ * USR03 - Algum parâmetro do formulário é inválido ou desconhecido
+ * USR04 - Algum parâmetro obrigatório do formulário vazio
+ * USR05 - CPF não encontrato na tabela de usuários
+ * USR06 - CPF ou Data Nascimento incorretos
  */
 session_start();
-ini_set('error_log', __DIR__.'/log/hotspot.log');
 require('../model/user.php');
 
 /**
@@ -17,54 +24,57 @@ error_log(serialize($_GET));
 error_log(serialize($_POST));
 
 $data = new stdClass();
-$data->task = filter_input(INPUT_POST, 'task'); // FUNÇÃO A SER ACIONADA
-$data->content = filter_input(INPUT_POST, 'content'); // DADOS DO FORMULÁRIO
+$data->task = filter_input(INPUT_POST, 'task'); // Função a ser acionada
+$data->content = filter_input(INPUT_POST, 'content'); // Dados do formulário preenchido
 
 if (trim($data->content) === '' || trim($data->task) === '') {
-    error('Faltou parâmetro (usr-01).');
+    return ret('Ocorreu um erro (Cod.: USR01).');
 } else {
-    $obj_content = json_decode($data->content);
-    if (!$obj_content) {
-        error('Dados de conteúdo inválidos (usr-02).');
+    $objContent = json_decode($data->content);
+    if (!$objContent) {
+        return ret('Ocorreu um erro (Cod.: USR02).');
     }
 }
 
-// INICIANDO INSTÂNCIA DO MODEL
+// Inicia uma instância do Model para consulta no BD
 $model = new UserModel();
 
-// REALIZA O TRATAMENTO DOS DADOS DE ACORDO COM O 'TASK'
+// Realiza o tratamento de acordo com a 'task'
 if ($data->task === 'login_user') {
     // Verificando os parâmetros recebidos
     $cpf = "";
-    $data_nasc = "";    
-    foreach($obj_content as $obj) {
+    $dataNasc = "";    
+    foreach($objContent as $obj) {
         error_log(serialize($obj));
         if ($obj->name === 'cpf') {
             $cpf = $obj->value;
         } else if ($obj->name === 'data_nasc') {
-            $data_nasc = $obj->value;
+            $dataNasc = $obj->value;
         } else {
-            error('Parâmetro de conteúdo desconhecido (usr-03)');
+            return ret('Ocorreu um erro (Cod.: USR03)');
         }
     }
 
-    if ($cpf === '' || $data_nasc === '') {
-        error('Dados inválidos (usr-04)');
+    if ($cpf === '' || $dataNasc === '') {
+        return ret('Ocorreu um erro (Cod.: USR04)');
     }
 
-    error_log('CPF: [' . $cpf . '] | Data Nasc: [' . $data_nasc . ']');
     // Corrigindo CPF
     $cpf = str_replace(array('.','-'), '', $cpf);
-    error_log('CPF: [' . $cpf . '] | Data Nasc: [' . $data_nasc . ']');
+    error_log('CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . ']');
 
+    // Verifica se o CPF está cadastrado
     if (!$model->checkIfUserExists($cpf)) {
-        error('Usuário não cadastrado');
+        return ret('Usuário não cadastrado');
+    }
+    // Verifica se usuário e senha estão corretos na tabela 'radcheck'
+    if (!$model->checkUserLogin($cpf, $dataNasc)) {
+        return ret('Dados inválidos');
     }
 
-    // VALIDA O LOGIN DO USUÁRIO
-    // - Recebe dados de CPF e Data de Nascimento
-    // - Valida no BD se os dados existem e estão válidos
-    // - Retorna OK ou ERRO
+    // Validação realizada com sucesso. Retorna OK
+    return ret('Login realizado com sucesso', 'SUCCESS');
+    
 } elseif ($data->task === 'create_user') {
     // REALIZA O CADASTRO DE UM USUÁRIO
     // - Recebe nome completo, CPF, e-mail e Data Nascimento
@@ -73,15 +83,17 @@ if ($data->task === 'login_user') {
     // - Insere os dados no BD
     // - Dispara e-mail de boas vindas
 } else {
-    error('Função inválida (usr-03');
+    ret('Função inválida (usr-03');
 }
-    
 
-function error($msgResult,$format = 'json') {
+/**
+ * Retorna o objeto de dados para o solicitante
+ */
+function ret($msgResult,$result = 'ERROR', $format = 'json') {
     error_log('msgResult:'.$msgResult);
     if ($format === 'json') {
         header('Content-Type: application/json');
-        echo '{"result":"ERROR", "msg_result":"'.$msgResult.'"}';
+        echo '{"result":"' . $result . '", "msg_result":"'.$msgResult.'"}';
     } else {
         die($msgResult);
     }

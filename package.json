@@ -1,6 +1,6 @@
 {
   "name": "conecta_garopaba",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Programa Conecta Garopaba",
   "main": "index.html",
   "scripts": {
@@ -15,8 +15,13 @@
   "bugs": {
     "url": "https://github.com/governodegaropaba/conecta_garopaba/issues"
   },
-  "homepage": "https://github.com/governodegaropaba/conecta_garopaba#readme",  
+  "homepage": "https://github.com/governodegaropaba/conecta_garopaba#readme",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-image": "^6.2.1",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-uglify-es": "^3.0.0"
   }
 }

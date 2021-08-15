@@ -99,11 +99,11 @@ class MySQL {
             try {
                 return $stmt->fetchColumn();
             } catch (Exception $e) {
-                error_log('[DGSQL::loadResult] Falha ao processar dados: ' . $e->getMessage());
+                error_log('[SQL::loadResult] Falha ao processar dados: ' . $e->getMessage());
                 return FALSE;
             }
         } else {
-            error_log('[DGSQL::loadResult] Não foi possível realizar a consulta via PDO');
+            error_log('[SQL::loadResult] Não foi possível realizar a consulta via PDO');
             return FALSE;
         }
     }
@@ -125,11 +125,11 @@ class MySQL {
                 }
                 return $objReturn;
             } catch (Exception $e) {
-                error_log('[DGSQL::loadObject] Falha ao processar dados: ' . $e->getMessage());
+                error_log('[SQL::loadObject] Falha ao processar dados: ' . $e->getMessage());
                 return FALSE;
             }
         } else {
-            error_log('[DGSQL::loadObject] Não foi possível realizar a consulta via PDO');
+            error_log('[SQL::loadObject] Não foi possível realizar a consulta via PDO');
             return FALSE;
         }
     }
@@ -155,11 +155,11 @@ class MySQL {
                 }
                 return $objReturn;
             } catch (Exception $e) {
-                error_log('[DGSQL::loadObjectList] Falha ao processar dados: ' . $e->getMessage());
+                error_log('[SQL::loadObjectList] Falha ao processar dados: ' . $e->getMessage());
                 return FALSE;
             }
         } else {
-            error_log('[DGSQL::loadObjectList] Não foi possível realizar a consulta via PDO');
+            error_log('[SQL::loadObjectList] Não foi possível realizar a consulta via PDO');
             return FALSE;
         }
     }
@@ -185,11 +185,11 @@ class MySQL {
                 }
                 return $objReturn;
             } catch (Exception $e) {
-                error_log('[DGSQL::loadArrayList] Falha ao processar dados: ' . $e->getMessage());
+                error_log('[SQL::loadArrayList] Falha ao processar dados: ' . $e->getMessage());
                 return FALSE;
             }
         } else {
-            error_log('[DGSQL::loadArrayList] Não foi possível realizar a consulta via PDO');
+            error_log('[SQL::loadArrayList] Não foi possível realizar a consulta via PDO');
             return FALSE;
         }
     }
@@ -210,11 +210,11 @@ class MySQL {
                 }
                 return $objReturn;
             } catch (Exception $e) {
-                DGLog::add(DGLog::ERROR, '[DGSQL::loadNumRows] Falha ao processar dados: ' . $e->getMessage());
+                error_log('[SQL::loadNumRows] Falha ao processar dados: ' . $e->getMessage());
                 return FALSE;
             }
         } else {
-            DGLog::add(DGLog::ERROR, '[DGSQL::loadNumRows] Não foi possível realizar a consulta via PDO');
+            error_log('[SQL::loadNumRows] Não foi possível realizar a consulta via PDO');
             return FALSE;
         }
     }
@@ -230,39 +230,10 @@ class MySQL {
         if ($stmt !== FALSE) {
             return TRUE;
         } else {
-            DGLog::add(DGLog::ERROR, '[DGSQL::execQuery] Não foi possível realizar a consulta via PDO');
+            error_log('[SQL::execQuery] Não foi possível realizar a consulta via PDO');
             return FALSE;
         }
-    }
-    
-    /**
-     * Verifica a existência de uma tabela no banco de dados
-     * @param String $table
-     * @return boolean
-     */
-    public static function checkTableExists($table) {
-        try {
-            return self::loadNumRows('SHOW TABLES FROM ' . ConfigSQL::DATABASE . ' LIKE ?', $table) > 0;
-        } catch (Exception $e) {
-            DGLog::add(DGLog::ERROR, '[DGSQL::checkTableExists] Falha ao processar dados: ' . $e->getMessage());
-            return FALSE;
-        }
-    }
-
-    /**
-     * Verifica a existência de uma coluna em uma tabela do banco de dados
-     * @param String $table
-     * @param String $column
-     * @return boolean
-     */
-    public static function checkColumnExist($table, $column) {
-        try {
-            return self::loadNumRows('SHOW COLUMNS FROM ' . $table . ' LIKE ?', $column) > 0;
-        } catch (Exception $e) {
-            DGLog::add(DGLog::ERROR, '[DGSQL::checkColumnExist] Falha ao processar dados: ' . $e->getMessage());
-            return FALSE;
-        }
-    }
+    }    
     
     /**
      * Retorna o último ID auto-increment registrado no banco de dados

@@ -39,14 +39,17 @@
         }
         
         console.log('vai executar ajax');
+        var formData = new ieFormData();        
+        formData.append('content', JSON.stringify($('.validate-form').serializeArray()));
+        
         if ($('.validate-form input[name="name"]').length > 0) {
             console.log('CRIAR CONTA');
             // Criar conta
-            sendCreateAccount();
+            sendCreateAccount(formData);
         } else {
             console.log('FAZER LOGIN');
             // Realizar login
-            return sendUserLogin();
+            return sendUserLogin(formData);
             
         }
         return false;
@@ -88,12 +91,9 @@
         console.log('CREATE', $('.validate-form').serializeArray());        
     }
 
-    function sendUserLogin() {
+    function sendUserLogin(formData) {
         console.log('LOGIN', $('.validate-form').serializeArray());        
-        
-        var formData = new ieFormData();
         formData.append('task', 'login_user');
-        formData.append('content', JSON.stringify($('.validate-form').serializeArray()));
         
         $.ajax({
             url: '../controller/user.php',
@@ -106,12 +106,17 @@
             contentType: formData.contentType,            
             success: function (data) {
                  console.log('DEU CERTO!', data);
+                 // Erro. Exibe mensagem de retorno
                  if (data.result === "ERROR") {
                     showMsgReturn(data.msg_result);
+                    return false;
                  }
-                 return false;
+                 // Sucesso. Redireciona para tela de bem-vindo
+                 window.location.href = 'welcome.html';
+                 return true;
             },
             error: function (obj, strStatus, strError) {                
+                showMsgReturn('Desculpe, ocorreu um erro (Cod.: USR99)');
                 console.error('sendUserLogin => ERROR | obj: ', obj, ' | status: ', strStatus, ' | statusMsg: ', strError);
                 return false;
             }

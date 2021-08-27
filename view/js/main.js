@@ -111,14 +111,37 @@
                     showMsgReturn(data.msg_result);
                     return false;
                  }
-                 // Sucesso. Redireciona para tela de bem-vindo
-                 window.location.href = 'welcome.html';
+                 // Vai realizar a consulta no MK
+                 checkLoginMK();                 
                  return true;
             },
             error: function (obj, strStatus, strError) {                
                 showMsgReturn('Desculpe, ocorreu um erro (Cod.: USR99)');
                 console.error('sendUserLogin => ERROR | obj: ', obj, ' | status: ', strStatus, ' | statusMsg: ', strError);
                 return false;
+            }
+        });
+        return false;
+    }
+
+    function checkLoginMK() {
+        console.log('CHECK LOGIN MK');        
+        $.ajax({
+            url: 'http://192.168.45.1/login',
+            type: 'POST',
+            data: $('.validate-form').serializeArray(),
+            cache: false,
+            async: false,            
+            success: function (data) {
+                 console.log('RETORNO SUCESS', data);
+                 window.location.href = 'welcome.html';
+                 return true;                 
+            },
+            error: function (obj, strStatus, strError) {                
+                //showMsgReturn('Desculpe, ocorreu um erro (Cod.: USR98)');
+                window.location.href = 'welcome.html';                
+                //console.error('checkLoginMK => ERROR | obj: ', obj, ' | status: ', strStatus, ' | statusMsg: ', strError);
+                return true;
             }
         });
         return false;

@@ -46,12 +46,12 @@ if ($data->task === 'login_user') {
     $dataNasc = "";    
     foreach($objContent as $obj) {
         error_log(serialize($obj));
-        if ($obj->name === 'cpf') {
+        if ($obj->name === 'username') {
             $cpf = $obj->value;
-        } else if ($obj->name === 'data_nasc') {
+        } else if ($obj->name === 'password') {
             $dataNasc = $obj->value;
-        } else {
-            return ret('Ocorreu um erro (Cod.: USR03)');
+        //} else {
+        //    return ret('Ocorreu um erro (Cod.: USR03)');
         }
     }
 
@@ -60,7 +60,7 @@ if ($data->task === 'login_user') {
     }
 
     // Corrigindo CPF
-    $cpf = str_replace(array('.','-'), '', $cpf);
+    // $cpf = str_replace(array('.','-'), '', $cpf);
     error_log('CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . ']');
 
     // Verifica se o CPF está cadastrado
@@ -70,7 +70,7 @@ if ($data->task === 'login_user') {
     // Verifica se usuário e senha estão corretos na tabela 'radcheck'
     if (!$model->checkUserLogin($cpf, $dataNasc)) {
         return ret('Dados inválidos');
-    }
+    }        
 
     // Validação realizada com sucesso. Retorna OK
     return ret('Login realizado com sucesso', 'SUCCESS');

@@ -20,9 +20,17 @@ class UserModel {
     /**
      * Verifica se os dados de login estão corretos na tabela 'radcheck'
      */
-    public function checkUserLogin($cpf, $data_nasc) {
-        $obj = MySQL::loadResult('SELECT COUNT(id) FROM radcheck WHERE username = "' . $cpf . '" AND value = "' . md5($data_nasc) . '"');
+    public function checkUserLogin($cpf, $dataNasc) {
+        $obj = MySQL::loadResult('SELECT COUNT(id) FROM radcheck WHERE username = "' . $cpf . '" AND value = "' . md5($dataNasc) . '"');
         return $obj > 0;
     }
 
+    /**
+     * Cadastra um usuário
+     */
+    public function addUser($cpf, $dataNasc, $email, $nome) {
+        return 
+            MySQL::execQuery('INSERT INTO users VALUE ("' . $cpf . '", "' . $nome . '", "' . $dataNasc . '", "' . $email . '", NOW())') &&
+            MySQL::execQuery('INSERT INTO radcheck (username, attribute, op, value) VALUES ("' . $cpf . '", "MD5-Password", ":=", "' . md5($dataNasc) . '")');
+    }
 }

@@ -32,6 +32,9 @@
 					<span class="login100-form-title p-b-26">
 						<img src="images/logo-128.png">
 					</span>
+					<div class="alert alert-danger" id="login-msg-return" style="display: none;">
+
+					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Informe seu nome">
 						<input class="input100" type="text" name="name">
@@ -39,12 +42,12 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Informe um CPF válido">
-						<input class="input100" oninput="applyCPFMask(this);" type="text" name="cpf">
+						<input class="input100" oninput="applyCPFMask(this);" type="text" name="username">
 						<span class="focus-input100" data-placeholder="CPF"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Informe uma data válida">
-						<input class="input100" type="date" name="data_nasc">
+						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
 						<span class="focus-input100" data-placeholder="Data de Nascimento"></span>
 					</div>
 
@@ -54,12 +57,12 @@
 						<span class="focus-input100" data-placeholder="E-mail"></span>
 					</div>
 
-					<div class="text-center validate-input">
+					<div class="text-center validate-input" data-validate="Aceite os termos">
 						<span class="txt1">
 							<input type="checkbox" name="auth">&nbsp;Concordo com os
 						</span>
 
-						<a class="txt2" href="#" target="_blank">
+						<a class="txt2" href="javascript:openTermsModal();">
 							termos de uso
 						</a>
 					</div>
@@ -76,7 +79,7 @@
 				</form>
 				<div class="text-center p-t-10">
 					<span class="txt1">
-						Versão: 1.0.2 - 
+						Versão: 1.0.2 -
 					</span>
 
 					<a class="txt2" href="mailto:dti@garopaba.sc.gov.br">
@@ -85,6 +88,124 @@
 				</div>
 			</div>
 
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Termos de Uso</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Disciplina o acesso ao WiFi PÚBLICO E GRATUITO DA CIDADE DE GAROPABA – Programa Conecta Garopaba
+						- e regulamenta suas condições de uso:</p>
+					<br>
+					<p><b>1 - Aceitação do Termo e Condições de Uso</b></p>
+					<p>A aceitação deste Termo e das Condições de Uso é absolutamente indispensável à utilização do
+						acesso
+						sem fio à WiFi PÚBLICO E GRATUITO DA CIDADE DE GAROPABA, ofertada pelo Programa Conecta
+						Garopaba.</p>
+					<p>Para fazer uso do serviço público e gratuito de acesso à Internet banda larga é preciso:</p>
+					<p> - Ler e concordar com as condições previstas neste Termo;</p>
+					<p> - Cadastrar-se, fornecendo informações válidas</p>
+					<br>
+					<p><b>2 – Modalidade de Acesso</b></p>
+					<p>O Programa Conecta Garopaba oferece um serviço de acesso público e gratuito à Internet,
+						interligando
+						computadores, celulares, tablets etc., do USUÁRIO à rede, por meio de conexão sem fio.</p>
+					<p>Será provida a modalidade ACESSO AUTENTICADO, com necessidade de cadastro no primeiro acesso e
+						mediante autenticação, com acesso livre às aplicações e serviços dispostos na Internet, conforme
+						tempo de acesso máximo por dia de 120min (2 horas), com perda de conexão por inatividade de
+						10min.</p>
+					<br>
+					<p><b>3 – Cadastro do USUÁRIO</b></p>
+					<p>O USUÁRIO declara e se responsabiliza pela veracidade de todos os dados por ele fornecidos ao
+						Programa Conecta Garopaba no momento de seu Cadastro e em qualquer atualização posterior,
+						ficando
+						responsável, portanto, pela sua exatidão e autenticidade.</p>
+					<p>No momento do cadastro, o USUÁRIO deverá informar nome completo, número do CPF, e-mail e data de
+						nascimento.</p>
+					<p>Somente será permitido um único cadastro por USUÁRIO, sendo necessário, para sua efetivação, o
+						preenchimento de todos os campos exigidos no respectivo formulário. Só assim o cadastro ficará
+						ativo
+						e o usuário poderá ter ACESSO AUTENTICADO.</p>
+					<br>
+					<p><b>4 – Equipamentos do USUÁRIO</b></p>
+					<p>Para acessar o serviço prestado pelo Programa Conecta Garopaba o USUÁRIO deve ter e instalar, às
+						suas expensas e sob sua responsabilidade, qualquer aparelho (notebooks, celulares ou tablets)
+						compatível com a tecnologia sem fio nos padrões IEEE 802.11 b/g/n, com os softwares de navegação
+						na
+						WEB, bem como deverá promover as medidas de segurança necessárias à proteção de seus
+						equipamentos,
+						sistemas e arquivos contra a atuação indevida e invasões não autorizadas de outros usuários de
+						Internet.</p>
+					<br>
+					<p><b>5 – Utilização dos Serviços pelo USUÁRIO</b></p>
+					<p>O USUÁRIO se obriga a não utilizar a via de acesso que lhe foi disponibilizada pela PREFEITURA DE
+						GAROPABA para tentar e conseguir acesso a outros sistemas que não os integrantes da INTERNET e
+						cuja
+						interligação não lhe foi autorizada (redes restritas de órgãos oficiais etc.).</p>
+					<p>O USUÁRIO se obriga a não utilizar os serviços de modo a prejudicar o acesso de outros USUÁRIOS à
+						INTERNET, e sua livre utilização.</p>
+					<p>O USUÁRIO se compromete a utilizar os serviços prestados pela PREFEITURA DE GAROPABA, com
+						observância da legislação vigente, somente para fins lícitos.</p>
+					<p>A PREFEITURA DE GAROPABA reserva-se o direito de remover ou recusar-se a veicular qualquer
+						informação detectada que, no todo ou em parte, viole as disposições de uso explicitadas no
+						presente
+						termo.</p>
+					<p>A PREFEITURA DE GAROPABA poderá suspender, bloquear, cancelar e, ainda, negar-se a disponibilizar
+						acesso à INTERNET – via seu sistema – ao USUÁRIO que violar ou estiver envolvido em violação,
+						direta
+						ou indiretamente, às normas de segurança aqui estabelecidas ou outras normas aplicáveis.</p>
+					<br>
+					<p><b>6 – Política de Armazenamento de Registros de Conexão</b></p>
+					<p>O USUÁRIO ao se registrar ou enviar informações de login no WiFi Público e Gratuito do Programa
+						Conecta Garopaba, fica ciente que o registro de conexão é mantido em bancos de dados pelo prazo
+						de
+						(01) um ano, conforme exigido no Art.13 do Marco Civil da Internet, Lei Nº 12.965, de 23 de
+						abril de
+						2014.</p>
+					<br>
+					<p><b>7- Prazo do presente termo de uso</b></p>
+					<p>O presente Termo entra em vigor a partir da aceitação eletrônica ratificada pelo Usuário,
+						permanecendo vigente por prazo indeterminado até que qualquer das partes motive a rescisão
+						contratual nas formas definidas neste Instrumento.</p>
+					<br>
+					<p><b>8 – Disposições Gerais</b></p>
+					<p>O USUÁRIO declara que possui plena capacidade jurídica para celebrar o presente contrato com a
+						PREFEITURA DE GAROPABA e declara ter compreendido todos os termos e condições contratuais,
+						aceitando-os sem reservas ou ressalvas e, obrigando-se a respeitá-los e cumpri-los.</p>
+					<p>As expressões em outro idioma utilizadas no texto deste regulamento são as internacionalmente
+						consagradas para as atividades e serviços nele contemplados, devendo ser lidas e interpretadas
+						de
+						acordo com o significado que lhes é atribuído pela comunidade internacional.</p>
+					<p>O não exercício pelas partes de quaisquer direitos previstos neste regulamento representa mera
+						liberalidade, não implicando em renúncia, novação e/ou transação relativamente a tais direitos,
+						os
+						quais poderão ser exercidos a qualquer momento.</p>
+					<p>Se qualquer das disposições deste regulamento vier a ser considerada ilegal, inválida ou ineficaz
+						por expressa previsão em lei posterior a sua formalização ou por decisão administrativa ou
+						judicial,
+						tal ilegalidade, falta de validade ou ineficácia será interpretada restritivamente, não
+						prejudicando
+						o contrato como um todo, que continuará vigente com todas as suas demais estipulações.</p>
+					<p>As partes elegem o Foro da cidade de Garopaba, Estado de Santa Catarina, com renúncia a qualquer
+						outro, por mais privilegiado que seja ou venha a ser, para dirimir as questões deste
+						regulamento.</p>
+					<br>
+					<p><b>DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO – PREFEITURA MUNICIPAL DE GAROPABA</b></p>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
 		</div>
 	</div>
 

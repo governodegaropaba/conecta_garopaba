@@ -120,7 +120,7 @@ if ($data->task === 'login_user') {
     // - @todo: Dispara e-mail de boas vindas
 
     // Validação realizada com sucesso. Retorna OK
-    return ret('Cadastro realizado com sucesso', 'SUCCESS');
+    return ret('Cadastro realizado com sucesso.', 'SUCCESS');
 } else {
     ret('Função inválida (usr-03');
 }

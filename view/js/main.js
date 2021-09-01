@@ -135,15 +135,16 @@
             contentType: formData.contentType,
             success: function (data) {
                 console.log('DEU CERTO!', data);
-                showMsgReturn(data.msg_result);
 
                 // Erro.
                 if (data.result === "ERROR") {                    
+                    showMsgReturn(data.msg_result);
                     return false;
                 }
 
-                // Exibe mensagem de sucesso e redireciona para login
-                setTimeout(window.location.href = 'index.html', 3000);
+                $("#login-msg-return").removeClass('alert-danger').addClass('alert-success').html('Cadastro realizado com sucesso. <b><a href="index.html">Clique aqui</a></b> para fazer o login.').fadeTo(4000, 500);
+                $('.validate-input').css('display', 'none');
+                return true;
             },
             error: function (obj, strStatus, strError) {
                 showMsgReturn('Desculpe, ocorreu um erro (Cod.: USR99)');
@@ -192,7 +193,7 @@
     function checkLoginMK(obj) {
         console.log('CHECK LOGIN MK');
         $.ajax({
-            url: 'http://192.168.45.1/login',
+            url: 'http://192.168.10.10/login',
             type: 'POST',
             data: obj,
             cache: false,
@@ -213,7 +214,7 @@
     }
 
     function showMsgReturn(msg) {
-        $("#login-msg-return").html(msg).fadeTo(4000, 500).slideUp(500, function () {
+        $("#login-msg-return").removeClass('alert-success').addClass('alert-danger').html(msg).fadeTo(4000, 500).slideUp(500, function () {
             $("#login-msg-return").slideUp(500);
         });
     }

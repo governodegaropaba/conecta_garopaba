@@ -106,3 +106,6 @@ dist
 package-lock.json
 .vscode/
 .gitignore
+
+# Config file
+model/classes/class.Config.php

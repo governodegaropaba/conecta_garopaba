@@ -22,7 +22,6 @@
     var input = $('.validate-input .input100');
 
     $('.validate-form').on('submit', function () {
-        console.log('chegou');
         var check = true;
 
         for (var i = 0; i < input.length; i++) {
@@ -31,23 +30,16 @@
                 check = false;
             }
         }
-        console.log('validou');
         // Se algum campo não for preenchido, retorna o erro
         if (!check) {
-            console.log('faltou campo');
             return check;
         }
 
-        console.log('formatando dados');
         var objSerialize = adaptForm();
-
-        console.log('vai executar ajax');
         if ($('.validate-form input[name="name"]').length > 0) {
-            console.log('CRIAR CONTA');
             // Criar conta
             return sendCreateAccount(objSerialize);
         } else {
-            console.log('FAZER LOGIN');
             // Realizar login
             return sendUserLogin(objSerialize);
 
@@ -95,7 +87,6 @@
     function adaptForm() {
         var objSerialize = $('.validate-form').serializeArray();
         objSerialize.forEach(function (e) {
-            console.log(e.name, e.value);
             if (e.name == 'username') { // Formatando CPF
                 e.value = e.value.replaceAll('.', '').replaceAll('-', '');
             } else if (e.name == 'password') { // Formatando data de nascimento
@@ -103,7 +94,6 @@
                 e.value = eTemp[2] + '-' + eTemp[1] + '-' + eTemp[0];
             }
         });
-        console.log('Formatado', objSerialize);
         return objSerialize;
     }
 
@@ -114,7 +104,6 @@
     }
 
     function sendCreateAccount(obj) {
-        console.log('CREATE', $('.validate-form').serializeArray());
         if ($('input[name="auth"]').prop('checked') == false) {
             showMsgReturn('Aceite os termos de uso para continuar');
             return false;
@@ -134,8 +123,6 @@
             processData: formData.processData,
             contentType: formData.contentType,
             success: function (data) {
-                console.log('DEU CERTO!', data);
-
                 // Erro.
                 if (data.result === "ERROR") {                    
                     showMsgReturn(data.msg_result);
@@ -156,7 +143,6 @@
     }
 
     function sendUserLogin(obj) {
-        console.log('LOGIN', obj);
         var formData = new ieFormData();
         formData.append('content', JSON.stringify(obj));
         formData.append('task', 'login_user');
@@ -171,7 +157,6 @@
             processData: formData.processData,
             contentType: formData.contentType,
             success: function (data) {
-                console.log('DEU CERTO!', data);
                 // Erro. Exibe mensagem de retorno
                 if (data.result === "ERROR") {
                     showMsgReturn(data.msg_result);
@@ -191,7 +176,6 @@
     }
 
     function checkLoginMK(obj) {
-        console.log('CHECK LOGIN MK');
         $.ajax({
             url: 'http://192.168.10.10/login',
             type: 'POST',
@@ -199,7 +183,6 @@
             cache: false,
             async: false,
             success: function (data) {
-                console.log('RETORNO SUCESS', data);
                 window.location.href = 'welcome.html';
                 return true;
             },

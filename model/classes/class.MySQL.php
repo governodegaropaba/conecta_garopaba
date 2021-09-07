@@ -1,5 +1,7 @@
 <?php
 
+require('class.Config.php'); // Variáveis de conexão
+
 /**
  * Gerenciamento do banco de dados formato MySQL com PDO - PHP Data Object
  *
@@ -8,10 +10,10 @@
 class MySQL {
 
     private static $pdo = NULL;
-    private static $db_hostname = 'localhost';
-    private static $db_database = 'radius';
-    private static $db_username = 'danilo';
-    private static $db_password = 'unisul1011';
+    private static $db_hostname = '';
+    private static $db_database = '';
+    private static $db_username = '';
+    private static $db_password = '';
 
     /**
      * Retorna uma instância do objeto PDO
@@ -20,6 +22,11 @@ class MySQL {
     public static function instance() {
         if (!self::$pdo) {
             try {
+                self::$db_hostname = Config::$database_hostname; // config.php
+                self::$db_database = Config::$database_database; // config.php
+                self::$db_username = Config::$database_username; // config.php
+                self::$db_password = Config::$database_password; // config.php
+
                 self::$pdo = new PDO("mysql:host=" . self::$db_hostname . ";dbname=" . self::$db_database, self::$db_username, self::$db_password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (Exception $e) {

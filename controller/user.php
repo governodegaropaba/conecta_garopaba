@@ -21,9 +21,6 @@ require('../model/user.php');
 /**
  * Leitura dos parâmetros
  */
-error_log(serialize($_GET));
-error_log(serialize($_POST));
-
 $data = new stdClass();
 $data->task = filter_input(INPUT_POST, 'task'); // Função a ser acionada
 $data->content = filter_input(INPUT_POST, 'content'); // Dados do formulário preenchido
@@ -46,7 +43,6 @@ if ($data->task === 'login_user') {
     $cpf = "";
     $dataNasc = "";
     foreach ($objContent as $obj) {
-        error_log(serialize($obj));
         if ($obj->name === 'username') {
             $cpf = $obj->value;
         } else if ($obj->name === 'password') {
@@ -61,7 +57,7 @@ if ($data->task === 'login_user') {
     }
 
     // Registrando dados no log
-    error_log('CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . ']');
+    error_log('Action: [login_user] | CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . ']');
 
     // Verifica se o CPF está cadastrado
     if (!$model->checkIfUserExists($cpf)) {
@@ -81,7 +77,6 @@ if ($data->task === 'login_user') {
     $email = "";
     $nome = "";
     foreach ($objContent as $obj) {
-        error_log(serialize($obj));
         if ($obj->name === 'username') {
             $cpf = $obj->value;
         } else if ($obj->name === 'password') {
@@ -100,7 +95,7 @@ if ($data->task === 'login_user') {
     }
 
     // Registrando dados no log
-    error_log('CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . '] | Email: [' . $email . '] | Nome: [' . $nome . ']');
+    error_log('Action: [create_user] | CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . '] | Email: [' . $email . '] | Nome: [' . $nome . ']');
 
     // Verifica se o CPF está cadastrado
     if ($model->checkIfUserExists($cpf)) {

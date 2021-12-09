@@ -10,3 +10,6 @@ O programa tem por objetivo fornecer internet sem fio gratuita para moradores e 
 - Comunicação física e lógica entre o equipamento concentrador e os equipamentos de acesso (antena);
 
 ## Funcionamento
+- O cidadão vai até qualquer ponto de wifi público da cidade. Ele então conecta na rede configurada. Neste caso, e rede é denominada "Conecta Garopaba".
+- Após conectar, é aberto o formulário de login, permitindo também o cadastro para o primeiro acesso.
+- Realizado o login, a conexão de internet é liberada pelo tempo limite e na velocidade configurada no equipamento concentrador.

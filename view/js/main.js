@@ -129,7 +129,7 @@
                     return false;
                 }
 
-                $("#login-msg-return").removeClass('alert-danger').addClass('alert-success').html('Cadastro realizado com sucesso. <b><a href="index.html">Clique aqui</a></b> para fazer o login.').fadeTo(4000, 500);
+                $("#login-msg-return").removeClass('alert-danger').addClass('alert-success').html('Cadastro realizado com sucesso. <b><a href="index.php">Clique aqui</a></b> para fazer o login.').fadeTo(4000, 500);
                 $('.validate-input').css('display', 'none');
                 return true;
             },
@@ -177,13 +177,13 @@
 
     function checkLoginMK(obj) {
         $.ajax({
-            url: 'http://192.168.10.10/login',
+            url: $('input[name="url"]').val(),
             type: 'POST',
             data: obj,
             cache: false,
             async: false,
             success: function (data) {
-                window.location.href = 'welcome.html';
+                window.location.href = 'welcome.html';                
                 return true;
             },
             error: function (obj, strStatus, strError) {

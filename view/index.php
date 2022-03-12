@@ -28,9 +28,10 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="POST" action="http://192.168.10.10/login">
+				<form class="login100-form validate-form">
 					<input type="hidden" name="domain" value="">
 					<input type="hidden" name="dst" value="http://www.mikrotik.com">
+					<input type="hidden" name="url" value="http://192.168.45.1/login">
 					<span class="login100-form-title p-b-26">
 						<img src="images/logo.png">
 					</span>
@@ -69,7 +70,7 @@
 				</form>
 				<div class="text-center p-t-10">
 					<span class="txt1">
-						Versão: 1.0.3 - 
+						Versão: 1.0.4 - 
 					</span>
 
 					<a class="txt2" href="mailto:dti@garopaba.sc.gov.br">
@@ -93,8 +94,7 @@
 	<script src="vendor/daterangepicker/moment.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-
+	<script src="js/main.js"></script>	
 </body>
 
 </html>

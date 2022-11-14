@@ -2,6 +2,26 @@
 (function ($) {
     "use strict";
 
+    // Função responsável por definir um FormData para IE 9 e 10
+    // Utilizado como padrão nas chamadas AJAX
+    var ieFormData = function ieFormData() {
+        if (window.FormData === undefined) {
+            this.processData = true;
+            this.contentType = 'application/x-www-form-urlencoded';
+            this.append = function (name, value) {
+                this[name] = value === undefined ? "" : value;
+                return true;
+            };
+        } else {
+            var formdata = new FormData();
+            formdata.processData = false;
+            formdata.contentType = false;
+            return formdata;
+        }
+    }
+
+    // Getting IP conection
+    getIPConection();
 
     /*==================================================================
     [ Focus input ]*/
@@ -66,7 +86,7 @@
         } else if ($(input).attr('name') == 'password') { // Data Nasc
             if ($(input).val().length < 10) { // XX/XX/XXXX
                 return false;
-            }        
+            }
         } else {
             if ($(input).val().trim() == '') {
                 return false;
@@ -108,7 +128,7 @@
             showMsgReturn('Aceite os termos de uso para continuar');
             return false;
         }
-        
+
         var formData = new ieFormData();
         formData.append('content', JSON.stringify(obj));
         formData.append('task', 'create_user');
@@ -124,7 +144,7 @@
             contentType: formData.contentType,
             success: function (data) {
                 // Erro.
-                if (data.result === "ERROR") {                    
+                if (data.result === "ERROR") {
                     showMsgReturn(data.msg_result);
                     return false;
                 }
@@ -183,7 +203,7 @@
             cache: false,
             async: false,
             success: function (data) {
-                window.location.href = 'welcome.html';                
+                window.location.href = 'welcome.html';
                 return true;
             },
             error: function (obj, strStatus, strError) {
@@ -191,6 +211,38 @@
                 window.location.href = 'welcome.html';
                 //console.error('checkLoginMK => ERROR | obj: ', obj, ' | status: ', strStatus, ' | statusMsg: ', strError);
                 return true;
+            }
+        });
+        return false;
+    }
+
+    function getIPConection() {
+        var formData = new ieFormData();
+        formData.append('task', 'connect_ip');
+
+        $.ajax({
+            url: '../controller/user.php',
+            type: 'POST',
+            data: formData,
+            cache: false,
+            dataType: 'json',
+            async: false,
+            processData: formData.processData,
+            contentType: formData.contentType,
+            success: function (data) {
+                // Erro. Exibe mensagem de retorno
+                if (data.result === "ERROR") {
+                    showMsgReturn(data.msg_result);
+                    return false;
+                }
+                // Define o campo com o IP de conexao
+                $('input[name="url"').attr('value', 'http://' + data.msg_result + '/login');
+                return true;
+            },
+            error: function (obj, strStatus, strError) {
+                showMsgReturn('Desculpe, ocorreu um erro (Cod.: USR99)');
+                console.error('getIPConection => ERROR | obj: ', obj, ' | status: ', strStatus, ' | statusMsg: ', strError);
+                return false;
             }
         });
         return false;
@@ -234,22 +286,4 @@ function applyDataNascMask(i) {
  */
 function openTermsModal() {
     $('#termsModal').modal();
-}
-
-// Função responsável por definir um FormData para IE 9 e 10
-// Utilizado como padrão nas chamadas AJAX
-var ieFormData = function ieFormData() {
-    if (window.FormData === undefined) {
-        this.processData = true;
-        this.contentType = 'application/x-www-form-urlencoded';
-        this.append = function (name, value) {
-            this[name] = value === undefined ? "" : value;
-            return true;
-        };
-    } else {
-        var formdata = new FormData();
-        formdata.processData = false;
-        formdata.contentType = false;
-        return formdata;
-    }
 }

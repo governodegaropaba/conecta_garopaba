@@ -22,9 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
 </head>
-
-<body>
-
+<body>	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -70,7 +68,7 @@
 				</form>
 				<div class="text-center p-t-10">
 					<span class="txt1">
-						Versão: 1.0.4 - 
+						Versão: 1.0.4 -
 					</span>
 
 					<a class="txt2" href="mailto:dti@garopaba.sc.gov.br">
@@ -94,7 +92,7 @@
 	<script src="vendor/daterangepicker/moment.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script src="js/main.js"></script>	
+	<script src="js/main.js"></script>
 </body>
 
 </html>

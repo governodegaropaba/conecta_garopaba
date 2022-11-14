@@ -25,9 +25,9 @@ $data = new stdClass();
 $data->task = filter_input(INPUT_POST, 'task'); // Função a ser acionada
 $data->content = filter_input(INPUT_POST, 'content'); // Dados do formulário preenchido
 
-if (trim($data->content) === '' || trim($data->task) === '') {
+if (trim($data->task) === '') {
     return ret('Ocorreu um erro (Cod.: USR01).');
-} else {
+} else if (trim($data->content) !== '') {
     $objContent = json_decode($data->content);
     if (!$objContent) {
         return ret('Ocorreu um erro (Cod.: USR02).');
@@ -116,6 +116,26 @@ if ($data->task === 'login_user') {
 
     // Validação realizada com sucesso. Retorna OK
     return ret('Cadastro realizado com sucesso.', 'SUCCESS');
+} elseif ($data->task === 'connect_ip') {
+    // Declare variables for IP adress requests
+    $http_client_ip = $_SERVER['HTTP_CLIENT_IP'];
+    $http_x_forwarded_for = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $remote_addr = $_SERVER['REMOTE_ADDR'];
+
+    // Request for most accurate IP address
+    if (!empty($http_client_ip)) {
+        $ip_address = $http_client_ip;
+    } else if (!empty($http_x_forwarded_for)) {
+        $ip_address = $http_x_forwarded_for;
+    } else {
+        $ip_address = $remote_addr;
+    }
+
+    // Add results to array - multiple IP addresses may be returned
+    $list = explode(',', $ip_address, 2);
+    $ip_map = explode('.', $list[0]);
+    $ip_map[3] = 1;
+    return ret(implode('.',$ip_map), 'SUCCESS');
 } else {
     ret('Função inválida (usr-03');
 }

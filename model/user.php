@@ -28,9 +28,9 @@ class UserModel {
     /**
      * Cadastra um usuário
      */
-    public function addUser($cpf, $dataNasc, $email, $nome) {
+    public function addUser($cpf, $dataNasc, $email, $nome, $language) {
         return 
-            MySQL::execQuery('INSERT INTO users (cpf, name, datanasc, email, createdate) VALUES ("' . $cpf . '", "' . $nome . '", "' . $dataNasc . '", "' . $email . '", NOW())') &&
+            MySQL::execQuery('INSERT INTO users (cpf, name, datanasc, email, language, createdate) VALUES ("' . $cpf . '", "' . $nome . '", "' . $dataNasc . '", "' . $email . '", "' . $language . '", NOW())') &&
             MySQL::execQuery('INSERT INTO radcheck (username, attribute, op, value) VALUES ("' . $cpf . '", "MD5-Password", ":=", "' . md5($dataNasc) . '")');
     }
 }

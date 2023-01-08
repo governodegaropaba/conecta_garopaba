@@ -11,9 +11,10 @@
  * USR01 - Algum parâmetro obrigatório na consulta não foi informado
  * USR02 - Dados do formulário em um formato inválido
  * USR03 - Algum parâmetro do formulário é inválido ou desconhecido
- * USR04 - Algum parâmetro obrigatório do formulário vazio
+ * USR04 - Data de nascimento não informado 
  * USR05 - CPF não encontrato na tabela de usuários
  * USR06 - CPF ou Data Nascimento incorretos
+ * USR07 - CPF não informado no login/cadastro
  */
 session_start();
 require('../model/user.php');
@@ -41,10 +42,17 @@ $model = new UserModel();
 if ($data->task === 'login_user') {
     // Verificando os parâmetros recebidos
     $cpf = "";
+    $language = 'ptbr';
+    $username_en = ""; // Formato de login ESPANHOL
+    $username_es = ""; // Formato de login INGLES
     $dataNasc = "";
     foreach ($objContent as $obj) {
         if ($obj->name === 'username') {
             $cpf = $obj->value;
+        } else if ($obj->name === 'username_en') {
+            $username_en = $obj->value;
+        } else if ($obj->name === 'username_es') {
+            $username_es = $obj->value;
         } else if ($obj->name === 'password') {
             $dataNasc = $obj->value;
             //} else {
@@ -52,12 +60,24 @@ if ($data->task === 'login_user') {
         }
     }
 
-    if ($cpf === '' || $dataNasc === '') {
+    // Determina a chave de login de acordo com o idioma
+    if ($cpf === '') {
+        if ($username_en !== '') {
+            $cpf = $username_en;
+            $language = 'en';
+        } else if ($username_es !== '') {
+            $cpf = $username_es;
+            $language = 'es';
+        } else {
+            return ret('Ocorreu um erro (Cod.: USR07)');
+        }        
+    }
+    if ($dataNasc === '') {
         return ret('Ocorreu um erro (Cod.: USR04)');
     }
 
     // Registrando dados no log
-    error_log('Action: [login_user] | CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . ']');
+    error_log('Action: [login_user] | CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . '] | Idioma: [' . $language . ']');
 
     // Verifica se o CPF está cadastrado
     if (!$model->checkIfUserExists($cpf)) {
@@ -73,12 +93,19 @@ if ($data->task === 'login_user') {
 } elseif ($data->task === 'create_user') {
     // Verificando os parâmetros recebidos
     $cpf = "";
+    $language = 'ptbr';
+    $username_en = ""; // Formato de login ESPANHOL
+    $username_es = ""; // Formato de login INGLES
     $dataNasc = "";
     $email = "";
     $nome = "";
     foreach ($objContent as $obj) {
         if ($obj->name === 'username') {
             $cpf = $obj->value;
+        } else if ($obj->name === 'username_en') {
+            $username_en = $obj->value;
+        } else if ($obj->name === 'username_es') {
+            $username_es = $obj->value;
         } else if ($obj->name === 'password') {
             $dataNasc = $obj->value;
         } else if ($obj->name === 'email') {
@@ -90,12 +117,25 @@ if ($data->task === 'login_user') {
         }
     }
 
-    if ($cpf === '' || $dataNasc === '' || $email === '' || $nome === '') {
+    // Determina a chave de login de acordo com o idioma
+    if ($cpf === '') {
+        if ($username_en !== '') {
+            $cpf = $username_en;
+            $language = 'en';
+        } else if ($username_es !== '') {
+            $cpf = $username_es;
+            $language = 'es';
+        } else {
+            return ret('Ocorreu um erro (Cod.: USR07)');
+        }        
+    }
+
+    if ($dataNasc === '' || $email === '' || $nome === '') {
         return ret('Ocorreu um erro (Cod.: USR005)');
     }
 
     // Registrando dados no log
-    error_log('Action: [create_user] | CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . '] | Email: [' . $email . '] | Nome: [' . $nome . ']');
+    error_log('Action: [create_user] | CPF: [' . $cpf . '] | Data Nasc: [' . $dataNasc . '] | Email: [' . $email . '] | Nome: [' . $nome . '] | Idioma: [' . $language . ']');
 
     // Verifica se o CPF está cadastrado
     if ($model->checkIfUserExists($cpf)) {
@@ -103,12 +143,12 @@ if ($data->task === 'login_user') {
     }
 
     // Verifica se o CPF é válido
-    if (!validaCPF($cpf)) {
+    if ($language == 'ptbr' && !validaCPF($cpf)) {
         return ret('CPF inválido');
     }
 
     // Realiza o cadastro no BD
-    if (!$model->addUser($cpf, $dataNasc, $email, $nome)) {
+    if (!$model->addUser($cpf, $dataNasc, $email, $nome, $language)) {
         return ret('Ocorreu um erro (Cod.: USR006');
     }
 

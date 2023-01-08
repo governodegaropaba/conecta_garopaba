@@ -30,35 +30,85 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form">
 					<input type="hidden" name="url" value="">
-					<span class="login100-form-title p-b-26">
+					<div style="float: right; cursor: pointer;"><a
+						onclick="$('.page-language').css('display', 'none'); $('.page-ptbr').css('display', '');"><img
+						  style="max-width: 100%;"
+						  src="images/flag_brazil.png"></a>
+					  <a onclick="$('.page-language').css('display', 'none'); $('.page-english').css('display', '');"><img
+						  style="max-width: 100%;"
+						  src="images/flag_usa.png">
+					  </a> <a onclick="$('.page-language').css('display', 'none'); $('.page-spanish').css('display', '');"><img
+						  style="max-width: 100%;"
+						  src="images/flag_spain.png"></a>
+					</div>
+					<span class="login100-form-title p-b-26"style="padding-top: 50px;">
 						<img src="images/logo-128.png">
 					</span>
 					<div class="alert alert-danger" id="login-msg-return" style="display: none;">
 
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Informe seu nome">
+					<!-- NOME -->
+					<div class="page-language page-ptbr wrap-input100 validate-input" data-validate="Informe seu nome">
 						<input class="input100" type="text" name="name">
 						<span class="focus-input100" data-placeholder="Nome Completo"></span>
 					</div>
+					<div class="page-language page-english wrap-input100 validate-input" style="display: none;" data-validate="Enter your name">
+						<input class="input100" type="text" name="name">
+						<span class="focus-input100" data-placeholder="Full name"></span>
+					</div>
+					<div class="page-language page-spanish wrap-input100 validate-input" style="display: none;" data-validate="Introduzca su nombre">
+						<input class="input100" type="text" name="name">
+						<span class="focus-input100" data-placeholder="Nombre completo"></span>
+					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Informe um CPF válido">
+					<!-- CPF/TELEFONE -->				
+					<div class="page-language page-ptbr wrap-input100 validate-input" data-validate="Informe um CPF válido">
 						<input class="input100" oninput="applyCPFMask(this);" type="text" name="username">
 						<span class="focus-input100" data-placeholder="CPF"></span>
 					</div>
+					<div class="page-language page-english wrap-input100 validate-input" style="display: none;" data-validate="Enter your phone number">
+						<input class="input100" type="text" name="username_en">
+						<span class="focus-input100" data-placeholder="Phone number"></span>
+					</div>
+					<div class="page-language page-spanish wrap-input100 validate-input" style="display: none;" data-validate="Ingrese su número telefónico">
+						<input class="input100" type="text" name="username_es">
+						<span class="focus-input100" data-placeholder="Número de teléfono"></span>
+					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Informe uma data válida">
+					<!-- DATA NASC -->
+					<div class="page-language page-ptbr wrap-input100 validate-input" data-validate="Informe uma data válida">
 						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
 						<span class="focus-input100" data-placeholder="Data de Nascimento"></span>
 					</div>
+					<div class="page-language page-english wrap-input100 validate-input" style="display: none;" data-validate="Enter a valid date">
+						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
+						<span class="focus-input100" data-placeholder="Birth date"></span>
+					</div>
+					<div class="page-language page-spanish wrap-input100 validate-input" style="display: none;" data-validate="Introduzca una fecha válida">
+						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
+						<span class="focus-input100" data-placeholder="Fecha de nacimiento"></span>
+					</div>					
 
-					<div class="wrap-input100 validate-input" style="margin-bottom: 10px;"
+					<!-- EMAIL -->
+					<div class="page-language page-ptbr wrap-input100 validate-input" style="margin-bottom: 10px;"
 						data-validate="Informe um e-mail válido">
 						<input class="input100" type="email" name="email">
 						<span class="focus-input100" data-placeholder="E-mail"></span>
 					</div>
+					<div class="page-language page-english wrap-input100 validate-input" style="margin-bottom: 10px; display: none;"
+						data-validate="Please enter a valid email">
+						<input class="input100" type="email" name="email">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+					<div class="page-language page-spanish wrap-input100 validate-input" style="margin-bottom: 10px; display: none;"
+						data-validate="Por favor proporcione un correo electrónico válido">
+						<input class="input100" type="email" name="email">
+						<span class="focus-input100" data-placeholder="Correo electrónico"></span>
+					</div>
 
-					<div class="text-center validate-input" data-validate="Aceite os termos">
+					<!-- TERMOS DE USO -->
+					<div class="page-language page-ptbr text-center validate-input" data-validate="Aceite os termos">
 						<span class="txt1">
 							<input type="checkbox" name="auth">&nbsp;Concordo com os
 						</span>
@@ -67,8 +117,27 @@
 							<b><u>termos de uso</u></b>
 						</a>
 					</div>
+					<div class="page-language page-english text-center validate-input" style="display: none;" data-validate="Accept the terms">
+						<span class="txt1">
+							<input type="checkbox" name="auth">&nbsp;I agree to the 
+						</span>
 
-					<div class="container-login100-form-btn validate-input">
+						<a class="txt2" href="javascript:openTermsModal();">
+							<b><u>terms of use</u></b>
+						</a>
+					</div>
+					<div class="page-language page-spanish text-center validate-input" style="display: none;" data-validate="Aceptar los términos">
+						<span class="txt1">
+							<input type="checkbox" name="auth">&nbsp;Estoy de acuerdo con los 
+						</span>
+
+						<a class="txt2" href="javascript:openTermsModal();">
+							<b><u>términos de uso</u></b>
+						</a>
+					</div>
+
+					<!-- CADASTRAR -->
+					<div class="page-language page-ptbr container-login100-form-btn validate-input">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
@@ -76,8 +145,25 @@
 							</button>
 						</div>
 					</div>
+					<div class="page-language page-english container-login100-form-btn validate-input" style="display: none;">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Register
+							</button>
+						</div>
+					</div>
+					<div class="page-language page-spanish container-login100-form-btn validate-input" style="display: none;">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Registrar
+							</button>
+						</div>
+					</div>
 
-					<div class="text-center p-t-15">
+					<!-- REALIZAR LOGIN -->
+					<div class="page-language page-ptbr text-center p-t-15">
 						<span class="txt1">
 							Já possui uma conta?
 						</span>
@@ -86,10 +172,28 @@
 							<b><u>Faça login</u></b>							
 						</a>
 					</div>
+					<div class="page-language page-english text-center p-t-15" style="display: none;">
+						<span class="txt1">
+							Already have an account?
+						</span>
+						
+						<a class="txt2" href="index.php">
+							<b><u>Sign in</u></b>							
+						</a>
+					</div>
+					<div class="page-language page-spanish text-center p-t-15" style="display: none;">
+						<span class="txt1">
+							¿Ya tienes una cuenta?							
+						</span>
+						
+						<a class="txt2" href="index.php">
+							<b><u>Registrarse</u></b>							
+						</a>
+					</div>
 				</form>
 				<div class="text-center p-t-10">
 					<span class="txt1">
-						Versão: 1.0.3 -
+						Versão: 1.0.5 -
 					</span>
 
 					<a class="txt2" href="mailto:dti@garopaba.sc.gov.br">

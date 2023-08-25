@@ -44,12 +44,12 @@
     $('.validate-form').on('submit', function () {
         var check = true;
 
-        for (var i = 0; i < input.length; i++) {
-            if (validate(input[i]) == false) {
-                showValidate(input[i]);
-                check = false;
-            }
-        }
+        //for (var i = 0; i < input.length; i++) {
+        //    if (validate(input[i]) == false) {
+        //        showValidate(input[i]);
+        //        check = false;
+        //    }
+        //}
         // Se algum campo não for preenchido, retorna o erro
         if (!check) {
             return check;
@@ -92,6 +92,7 @@
         //        return false;
         //    }
         }
+        return true;
     }
 
     function showValidate(input) {

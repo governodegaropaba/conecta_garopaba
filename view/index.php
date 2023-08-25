@@ -22,81 +22,60 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
 </head>
-<body>	
+
+<body>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form id="frm_login" class="login100-form validate-form">
 					<input type="hidden" name="domain" value="">
 					<input type="hidden" name="dst" value="http://www.mikrotik.com">
 					<input type="hidden" name="url" value="http://192.168.45.1/login">
-					<div style="float: right; cursor: pointer;"><a
-						onclick="$('.page-language').css('display', 'none'); $('.page-ptbr').css('display', '');"><img
-						  style="max-width: 100%;"
-						  src="images/flag_brazil.png"></a>
-					  <a onclick="$('.page-language').css('display', 'none'); $('.page-english').css('display', '');"><img
-						  style="max-width: 100%;"
-						  src="images/flag_usa.png">
-					  </a> <a onclick="$('.page-language').css('display', 'none'); $('.page-spanish').css('display', '');"><img
-						  style="max-width: 100%;"
-						  src="images/flag_spain.png"></a>
+					<div style="float: right; cursor: pointer;"><a onclick="$('.page-language').css('display', 'none'); $('.page-ptbr').css('display', '');"><img style="max-width: 100%;" src="images/flag_brazil.png"></a>
+						<a onclick="$('.page-language').css('display', 'none'); $('.page-english').css('display', '');"><img style="max-width: 100%;" src="images/flag_usa.png">
+						</a> <a onclick="$('.page-language').css('display', 'none'); $('.page-spanish').css('display', '');"><img style="max-width: 100%;" src="images/flag_spain.png"></a>
 					</div>
 					<span class="login100-form-title p-b-26">
 						<img src="images/logo.png">
 					</span>
 					<div class="alert alert-danger" id="login-msg-return" style="display: none;">
 
-					</div>	
-					<!-- CPF/TELEFONE -->				
-					<div class="page-language page-ptbr wrap-input100 validate-input" data-validate="Informe um CPF válido">
+					</div>
+					<!-- CPF/TELEFONE -->
+					<div class="page-language page-ptbr wrap-input100" data-validate="Informe um CPF válido">
 						<input class="input100" oninput="applyCPFMask(this);" type="text" name="username">
 						<span class="focus-input100" data-placeholder="CPF"></span>
 					</div>
-					<div class="page-language page-english wrap-input100 validate-input" style="display: none;" data-validate="Enter your phone number">
+					<div class="page-language page-english wrap-input100" style="display: none;" data-validate="Enter your phone number">
 						<input class="input100" type="text" name="username_en">
 						<span class="focus-input100" data-placeholder="Phone number"></span>
 					</div>
-					<div class="page-language page-spanish wrap-input100 validate-input" style="display: none;" data-validate="Ingrese su número telefónico">
+					<div class="page-language page-spanish wrap-input100" style="display: none;" data-validate="Ingrese su número telefónico">
 						<input class="input100" type="text" name="username_es">
 						<span class="focus-input100" data-placeholder="Número de teléfono"></span>
 					</div>
 
 					<!-- DATA NASC -->
-					<div class="page-language page-ptbr wrap-input100 validate-input" data-validate="Informe uma data válida">
+					<div class="page-language page-ptbr wrap-input100" data-validate="Informe uma data válida">
 						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
 						<span class="focus-input100" data-placeholder="Data de Nascimento"></span>
 					</div>
-					<div class="page-language page-english wrap-input100 validate-input" style="display: none;" data-validate="Enter a valid date">
-						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
+					<div class="page-language page-english wrap-input100" style="display: none;" data-validate="Enter a valid date">
+						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password_en">
 						<span class="focus-input100" data-placeholder="Birth date"></span>
 					</div>
-					<div class="page-language page-spanish wrap-input100 validate-input" style="display: none;" data-validate="Introduzca una fecha válida">
-						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
+					<div class="page-language page-spanish wrap-input100" style="display: none;" data-validate="Introduzca una fecha válida">
+						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password_es">
 						<span class="focus-input100" data-placeholder="Fecha de nacimiento"></span>
 					</div>
 
 					<!-- SUBMIT -->
-					<div class="page-language page-ptbr container-login100-form-btn">
+					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button id="btn-login" class="login100-form-btn">
-								Entrar
-							</button>
-						</div>
-					</div>
-					<div class="page-language page-english container-login100-form-btn" style="display: none;">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button id="btn-login" class="login100-form-btn">
-								Login
-							</button>
-						</div>
-					</div>
-					<div class="page-language page-spanish container-login100-form-btn" style="display: none;">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button id="btn-login" class="login100-form-btn">
-								Entrar
+								<div class="page-language page-ptbr page-spanish">Entrar</div>
+								<div class="page-language page-english" style="display: none;">Login</div>
 							</button>
 						</div>
 					</div>

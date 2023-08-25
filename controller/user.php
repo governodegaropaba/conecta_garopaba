@@ -43,9 +43,11 @@ if ($data->task === 'login_user') {
     // Verificando os parâmetros recebidos
     $cpf = "";
     $language = 'ptbr';
-    $username_en = ""; // Formato de login ESPANHOL
-    $username_es = ""; // Formato de login INGLES
+    $username_en = ""; // Formato de login INGLES
+    $username_es = ""; // Formato de login ESPANHOL
     $dataNasc = "";
+    $dataNasc_en = ""; // Formato de login INGLES
+    $dataNasc_es = ""; // Formato de login ESPANHOL
     foreach ($objContent as $obj) {
         if ($obj->name === 'username') {
             $cpf = $obj->value;
@@ -54,10 +56,13 @@ if ($data->task === 'login_user') {
         } else if ($obj->name === 'username_es') {
             $username_es = $obj->value;
         } else if ($obj->name === 'password') {
-            $dataNasc = $obj->value;
-            //} else {
-            //    return ret('Ocorreu um erro (Cod.: USR03)');
+            $dataNasc = $obj->value;        
+        } else if ($obj->name === 'password_en') {
+            $dataNasc_en = $obj->value;        
+        } else if ($obj->name === 'password_es') {
+            $dataNasc_es = $obj->value;        
         }
+
     }
 
     // Determina a chave de login de acordo com o idioma
@@ -65,9 +70,11 @@ if ($data->task === 'login_user') {
         if ($username_en !== '') {
             $cpf = $username_en;
             $language = 'en';
+            $dataNasc = $dataNasc_en;
         } else if ($username_es !== '') {
             $cpf = $username_es;
             $language = 'es';
+            $dataNasc = $dataNasc_es;
         } else {
             return ret('Ocorreu um erro (Cod.: USR07)');
         }        

@@ -49,19 +49,19 @@
 					</div>
 
 					<!-- NOME -->
-					<div class="page-language page-ptbr wrap-input100 validate-input" data-validate="Informe seu nome">
+					<div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="name">
-						<span class="focus-input100" data-placeholder="Nome Completo"></span>
+						<div class="page-language page-ptbr" data-validate="Informe seu nome">
+							<span class="focus-input100" data-placeholder="Nome Completo"></span>
+						</div>
+						<div class="page-language page-english" style="display: none;" data-validate="Enter your name">							
+							<span class="focus-input100" data-placeholder="Full name"></span>							
+						</div>
+						<div class="page-language page-spanish" style="display: none;" data-validate="Introduzca su nombre">							
+							<span class="focus-input100" data-placeholder="Nombre completo"></span>
+						</div>
 					</div>
-					<div class="page-language page-english wrap-input100 validate-input" style="display: none;" data-validate="Enter your name">
-						<input class="input100" type="text" name="name">
-						<span class="focus-input100" data-placeholder="Full name"></span>
-					</div>
-					<div class="page-language page-spanish wrap-input100 validate-input" style="display: none;" data-validate="Introduzca su nombre">
-						<input class="input100" type="text" name="name">
-						<span class="focus-input100" data-placeholder="Nombre completo"></span>
-					</div>
-
+					
 					<!-- CPF/TELEFONE -->				
 					<div class="page-language page-ptbr wrap-input100 validate-input" data-validate="Informe um CPF válido">
 						<input class="input100" oninput="applyCPFMask(this);" type="text" name="username">
@@ -77,38 +77,35 @@
 					</div>
 
 					<!-- DATA NASC -->
-					<div class="page-language page-ptbr wrap-input100 validate-input" data-validate="Informe uma data válida">
+					<div class="wrap-input100 validate-input">
 						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
-						<span class="focus-input100" data-placeholder="Data de Nascimento"></span>
-					</div>
-					<div class="page-language page-english wrap-input100 validate-input" style="display: none;" data-validate="Enter a valid date">
-						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
-						<span class="focus-input100" data-placeholder="Birth date"></span>
-					</div>
-					<div class="page-language page-spanish wrap-input100 validate-input" style="display: none;" data-validate="Introduzca una fecha válida">
-						<input class="input100" oninput="applyDataNascMask(this);" type="text" name="password">
-						<span class="focus-input100" data-placeholder="Fecha de nacimiento"></span>
+						<div class="page-language page-ptbr" data-validate="Informe uma data válida">							
+							<span class="focus-input100" data-placeholder="Data de Nascimento"></span>
+						</div>
+						<div class="page-language page-english" style="display: none;" data-validate="Enter a valid date">							
+							<span class="focus-input100" data-placeholder="Birth date"></span>
+						</div>
+						<div class="page-language page-spanish" style="display: none;" data-validate="Introduzca una fecha válida">
+							<span class="focus-input100" data-placeholder="Fecha de nacimiento"></span>
+						</div>					
 					</div>					
-
+									
 					<!-- EMAIL -->
-					<div class="page-language page-ptbr wrap-input100 validate-input" style="margin-bottom: 10px;"
-						data-validate="Informe um e-mail válido">
+					<div class="wrap-input100 validate-input" style="margin-bottom: 10px;">
 						<input class="input100" type="email" name="email">
-						<span class="focus-input100" data-placeholder="E-mail"></span>
+						<div class="page-language page-ptbr" data-validate="Informe um e-mail válido">						
+							<span class="focus-input100" data-placeholder="E-mail"></span>
+						</div>	
+						<div class="page-language page-english" style="display: none;" data-validate="Please enter a valid email">
+							<span class="focus-input100" data-placeholder="Email"></span>
+						</div>
+						<div class="page-language page-spanish" style="display: none;" data-validate="Por favor proporcione un correo electrónico válido">						
+							<span class="focus-input100" data-placeholder="Correo electrónico"></span>
+						</div>
 					</div>
-					<div class="page-language page-english wrap-input100 validate-input" style="margin-bottom: 10px; display: none;"
-						data-validate="Please enter a valid email">
-						<input class="input100" type="email" name="email">
-						<span class="focus-input100" data-placeholder="Email"></span>
-					</div>
-					<div class="page-language page-spanish wrap-input100 validate-input" style="margin-bottom: 10px; display: none;"
-						data-validate="Por favor proporcione un correo electrónico válido">
-						<input class="input100" type="email" name="email">
-						<span class="focus-input100" data-placeholder="Correo electrónico"></span>
-					</div>
-
+					
 					<!-- TERMOS DE USO -->
-					<div class="page-language page-ptbr text-center validate-input" data-validate="Aceite os termos">
+					<div class="page-language page-ptbr text-center" data-validate="Aceite os termos">
 						<span class="txt1">
 							<input type="checkbox" name="auth">&nbsp;Concordo com os
 						</span>
@@ -117,7 +114,7 @@
 							<b><u>termos de uso</u></b>
 						</a>
 					</div>
-					<div class="page-language page-english text-center validate-input" style="display: none;" data-validate="Accept the terms">
+					<div class="page-language page-english text-center" style="display: none;" data-validate="Accept the terms">
 						<span class="txt1">
 							<input type="checkbox" name="auth">&nbsp;I agree to the 
 						</span>
@@ -126,7 +123,7 @@
 							<b><u>terms of use</u></b>
 						</a>
 					</div>
-					<div class="page-language page-spanish text-center validate-input" style="display: none;" data-validate="Aceptar los términos">
+					<div class="page-language page-spanish text-center" style="display: none;" data-validate="Aceptar los términos">
 						<span class="txt1">
 							<input type="checkbox" name="auth">&nbsp;Estoy de acuerdo con los 
 						</span>
@@ -137,7 +134,7 @@
 					</div>
 
 					<!-- CADASTRAR -->
-					<div class="page-language page-ptbr container-login100-form-btn validate-input">
+					<div class="page-language page-ptbr container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
@@ -145,7 +142,7 @@
 							</button>
 						</div>
 					</div>
-					<div class="page-language page-english container-login100-form-btn validate-input" style="display: none;">
+					<div class="page-language page-english container-login100-form-btn" style="display: none;">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
@@ -153,7 +150,7 @@
 							</button>
 						</div>
 					</div>
-					<div class="page-language page-spanish container-login100-form-btn validate-input" style="display: none;">
+					<div class="page-language page-spanish container-login100-form-btn" style="display: none;">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
